@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="sendEmail();reset();return false;">
+        <input type="text" id="name" name="name" placeholder="Your Name">
+        <input type="email" id="email" name="email" placeholder="Your Email">
+        <input type="number" id="phone" name="phone" placeholder="Your Phone">
+        <select id="mySelect">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+        <textarea id="message" name="message" placeholder="Your Message"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        function sendEmail() {
+            var userName = document.getElementById('name').value;
+            var phone = document.getElementById('phone').value;
+            var email = document.getElementById('email').value;
+            var mySelect = document.getElementById('mySelect').value;
+            var message = document.getElementById('message').value;
+
+            var messageBody = "Name: " + userName + "<br/> Phone: " + phone + "<br/> Email: " + email + "<br/> course: " + mySelect + "<br/> Message: " + message;
+
+            Email.send({
+                Host: "smtp.elasticemail.com",
+                Username: "ajayi.femi.eee@gmail.com",
+                Password: "582A9993BCB1C6E078938F8FA34D1EFF89FC",
+                port: 2525,
+                To: "ajayi.femi.eee@gmail.com",
+                From: "ajayi.femi.eee@gmail.com",
+                Subject: "This is the subject",
+                Body: messageBody
+            }).then(message => {
+                if (message == 'OK') {
+                    swal("Good job!", "You clicked the button!", "success");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
